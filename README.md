@@ -1,2 +1,2 @@
-# COMP3230-TutorialLabs
-Official release of COMP3230 TutorialLabs. Pull Requests are welcome.
+# COMP3230-Tutorialabs
+Official release of COMP3230 Tutorialabs. Pull Requests are welcome.
