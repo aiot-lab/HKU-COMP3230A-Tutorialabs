@@ -1,5 +1,8 @@
 #include <unistd.h>
 #include <stdio.h>
+#include <signal.h>
+#include <string.h>
+#include <sys/wait.h>
 
 int main() {
   int pfd[2];
