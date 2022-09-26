@@ -7,13 +7,11 @@ The key points of this documents are:
 3. Debugging commmands
 
 ## 1. Signals
-Signals used in this tutorial are listed in the following table. Please be aware that the signals are not the same on different OS, and the signals may be different on different machines.
+Signals used on workbench2 (Ubuntu with Kernel 5.4.0-124-generic) are listed in the following table. Signals may be different on different machines and OSs.
 
 > You can find this information at `/usr/include/x86_64-linux-gnu/bits/signum-generic.h` and `/usr/include/x86_64-linux-gnu/sys/signal.h`.
 
-As we use workbench2 as our benchmark, the signals are listed in the following table. (you can also find the table in COMP3230_signal.h, which is a summary of the signals on workbench2) Please be careful with those in bold.
-
-
+See also [COMP3230_signal.h](../Tutorial1-Lab1-signal/COMP3230_signal.h) for the signal names and functionality on workbench2.
 
 | No | Signal | Description |
 |:--:|:------:|:-----------:|
@@ -56,12 +54,12 @@ Please refer to [Tutorial1-Lab1-signal/02_signal_int_handle.c](../Tutorial1-Lab1
 This section is to show you how to send a signal and handle it (use SIGUSR1 as an example).
 
 #### 1.b.1 raise a signal
-1. `raise(SIGUSR1)`: raise a signal in the current process. see `Tutorial1-Lab1-signal/08_signal_fpe_raise_handle.c`.
+1. `raise(SIGUSR1)`: raise a signal in the current process. see [Tutorial1-Lab1-signal/08_signal_fpe_raise_handle.c`](../Tutorial1-Lab1-signal/08_signal_fpe_raise_handle.c)
 2. `kill(pid, SIGUSR1)`: send a signal to a process `pid`. Similar to `raise`, but you can specify the process who receives the signal.
 
 #### 1.b.2 handle a signal
 1. use `signal(SIGUSR1, handler)`: set the handler for the signal `SIGUSR1`. 
-2. use `sigaction(SIGUSR1, &act, NULL)`: set the handler for the signal `SIGUSR1`. The difference between `signal` and `sigaction` is that `sigaction` allows you to set more options and get more information about the signal. See [signal(7) — Linux manual page](https://man7.org/linux/man-pages/man7/signal.7.html)
+2. use `sigaction(SIGUSR1, &act, NULL)`: set the handler for the signal `SIGUSR1`. The difference between `signal` and `sigaction` is that `sigaction` allows you to set more options and get more information about the signal. See [signal(7)](https://man7.org/linux/man-pages/man7/signal.7.html)
 
 The following example shows you how to define a signal handler using sigaction to get the sender of the signal.
 
@@ -101,7 +99,7 @@ See [Tutorial1-Lab1-signal/17_signal_chld_handle.c](../Tutorial1-Lab1-signal/17_
 ### 1.d SIGPIPE: handle the signal when a pipe is broken
 SIGPIPE is sent to the process when a pipe is broken. The following example shows you when SIGPIPE is sent.
 
-See [Tutorial2-Process/lab2-pipesig.c](lab2-pipesig.c)
+See [lab2-pipesig.c](lab2-pipesig.c)
 
 ## 2. Useful syscalls
 ### 2.a exec() family
@@ -125,14 +123,15 @@ The wait() family of functions suspends execution of the calling process until o
 
 also, there are 2 non-standard functions:
 1. wait3(int *wstatus, int options, struct rusage *rusage): wait for any child process
-2. **wait4**(pid_t pid, int *wstatus, int options, struct rusage *rusage): wait for a specific child process
+2. **wait4(pid_t pid, int *wstatus, int options, struct rusage *rusage)**: wait for a specific child process
 
 Apart from additional "rusage" option, wait3 and wait4 are identical to waitpid(-1, wstatus, options) and waitpid(pid, wstatus, options, rusage).
 
 #### 2.b.1 wait4()
-As wait3() is built on top of wait4(), rhe following example will only focus on wait4. By using wait4, you can get more information about the child process, like the resource usage. 
+As `wait3()` is built on top of `wait4()`, the following example will only focus on `wait4()`. By using `wait4()`, you can get more information about the child process, like the resource usage (from parameter rusage). 
 
-See also [getrusage(2)](https://man7.org/linux/man-pages/man2/getrusage.2.html) for more information.
+See [getrusage(2)](https://man7.org/linux/man-pages/man2/getrusage.2.html) for more information in parameter rusage.
+
 ```c
         struct rusage {
                struct timeval ru_utime; /* user CPU time used */
@@ -154,18 +153,19 @@ See also [getrusage(2)](https://man7.org/linux/man-pages/man2/getrusage.2.html) 
            };
 ```
 
-See [Tutorial2-Process/fork-exec-wait4-example.c](fork-exec-wait4-example.c) for an example.
+See [Tutorial2-Process/fork-exec-wait4-example.c](fork-exec-wait4-example.c) for an example of using wait4() to get user/sys time usage.
 
 
 ## 3. multi-process(fork) degbugging using
+This section shows you how to debug a multi-process program using `gdb`. Pay attention to follow-fork-mode and detach-on-fork setting in gdb (Step 4).
 
 1. compile with `-g` flag
 2. GDB start: run `gdb <program>` to start debugging
 3. Breakpoint add: set breakpoint: `b <line number>` or `b <function name>`
 4. **GDB settings for fork debug**: useful setting to help debugging fork, enter it in gdb commandline before running:
-    `set follow-fork-mode <child|parent|ask>`, if you want to debug the child process, set it to `child`. <\br>
-    `set detach-on-fork off`, if you want the parent process to wait for the child process to finish, set it to `off`. <\br>
-    `set follow-fork-mode child` and `set detach-on-fork off` are the default settings. <\br>
+    * `set follow-fork-mode <child|parent>`, if you want to follow the child process after `fork()`, set it to `child`.
+    * `set detach-on-fork <on|off>`, if you want to detach the other process (depending on follow-fork-mode) after `fork()`, set it to `on`.
+    * By default `follow-fork-mode = parent` and `detach-on-fork = on` are the default settings. Therefore, if fork() is called, the parent process will be attacted by gdb and the child process will run concurrently to its end.
 5. GDB run: run `r` to run the program
 6. next line: run `n` to go to the next line
 7. step into: run `s` to step into the function
