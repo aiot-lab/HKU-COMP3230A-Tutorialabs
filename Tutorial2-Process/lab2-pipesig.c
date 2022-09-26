@@ -11,7 +11,8 @@ int main() {
     sleep(2); //force child to run later
     close(pfd[0]); //close the read end
     char buff[100];
-    if (write(pfd[1], buff, 100) == -1) printf("Child: Encountered write error\n");
+    if (write(pfd[1], buff, 100) == -1) 
+      printf("Child: Encountered write error\n");
   } else { //in parent
     close(pfd[0]); //close the read end
     printf("Press enter to close the program\n");

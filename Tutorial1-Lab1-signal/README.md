@@ -20,7 +20,7 @@ hints to find them: `gcc -H <filename_to_compile>`
 4. signal_list.c : list all the signals on the system
 
 ## Signal-lab Answer
-Q1. Why it fails to override signal handler for SIGFPE?
+Q1. Why it fails to override signal handler for SIGFPE? <\br>
 A1. Although the signal handler for SIGFPE is overridden and execution of the signal handler is successful, the main program is still in a dead loop of "SIGFPE->handle->SIGFPE". One possible solution is to restore the environment of the main program before the possible SIGFPE occurs.
 ```c
 #include <stdio.h>
