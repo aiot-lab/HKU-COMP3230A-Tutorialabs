@@ -1,4 +1,5 @@
 # C String process
+### Contents
 String processing is always a common task in programming, and especially in a commandline interface. This document aims to introduce how to process a string in C, including:
 
 0) Basic concepts and how to - 
@@ -6,13 +7,26 @@ String processing is always a common task in programming, and especially in a co
 2) use a format string
 3) convert error num/signal num to a readable message. 
 
-How to use this document:
-1. For C beginners, please read the document from top to bottom, and try to understand the code and run the code by yourselves. For more other details about C, you can visit any C tutorial website, like [w3school](https://www.w3schools.com/c/index.php) or send your questions to TAs.
-2. To run the code in this doc, you can either copy them as a new C file, or use `md-auto-compiler.sh` provided in the same directory to automatically compile example code from given range of doc lines (usage: ./md-auto-compiler.sh \<file\> \<start line\> \<end line\> e.g. ./md-auto-compiler.sh 05-c-string.md 22 41).
+### How to use
+1. Please read the document from top to bottom, and try to understand the code and run the code by yourselves. For more other details about C, you can visit any C tutorial website, like [w3school](https://www.w3schools.com/c/index.php) or send your questions to TAs.
+2. To run the code in this doc, you can either copy them as a new C file, or use `md-auto-compiler.sh` provided in the same directory to automatically compile example code from given range of doc lines (open it in your editor to get line number).
+
+./md-auto-compiler.sh usage:
+```bash
+#./md-auto-compiler.sh <file> <start line> <end line> 
+./md-auto-compiler.sh 05-c-string.md 40 59
+```
 
 ## 0.Basic concepts of C string
 ### 0.0 char in C
-Char is a one-byte data type in C language, which can store a character. Since a char is a one-byte(8 bits of 0-1) data type, it store at most 256 different unsigned (from 0) integers. C Language uses ASCII to represent characters, i.e, to interpret a one-byte integer as a string using ASCII as look-up table. For example, the character 'a' is represented by 97 in ASCII. The character 'A' is represented by 65 in ASCII. Specially, the value 0 represents the null character '\0', and is used to indicate the end of a string. Also, there are other special characters, such as '\n'(10), '\t'(9), '\r'(13), etc. For more information, please refer to [ASCII table](https://www.asciitable.com/).
+
+#### ASCII
+Char is an unsigned one-byte(0-255) data type in C language, which can store a character. C Language uses ASCII to represent characters. For example, the character 'a' is represented by 97 in ASCII. The character 'A' is represented by 65 in ASCII. (See ASCII Table below)
+
+#### special characters
+Specially, the value 0 represents the null character '\0', and is used to indicate the end of a string. Also, there are other special characters, such as '\n'(10), '\t'(9), '\r'(13), etc. For more information, please refer to 
+
+![ASCII](https://www.asciitable.com/asciifull.gif)
 
 ### 0.1 String in C
 In C, a string is represented by a char array. For example, the string "hello" is represented by the char array `{'h', 'e', 'l', 'l', 'o', '\0'}`. The last element of the char array is `\0`, which is the end of the string. The following example shows you how to define a string in C.
