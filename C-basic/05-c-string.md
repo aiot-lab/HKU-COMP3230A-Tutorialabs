@@ -1,4 +1,4 @@
-# C String processs
+# C String process
 String processing is always a common task in programming, and it is especially,   Commandline interface
 This document aims to introduce how to process a string in C, including string copy, string compare, string concatenate, string length, string to integer, and integer to string.
 
