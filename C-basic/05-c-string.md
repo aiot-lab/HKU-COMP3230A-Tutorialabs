@@ -1,6 +1,5 @@
 # C String process
-String processing is always a common task in programming, and it is especially,   Commandline interface
-This document aims to introduce how to process a string in C, including string copy, string compare, string concatenate, string length, string to integer, and integer to string.
+String processing is always a common task in programming, and especially in a commandline interface. This document aims to introduce how to process a string in C, including string copy, string compare, string concatenate, string length, string to integer, and integer to string.
 
 How to use this document:
 1. For C beginners, please read the document from top to bottom, and try to understand the code and run the code by yourselves. For more other details about C, you can visit any C tutorial website, like [w3school](https://www.w3schools.com/c/index.php) or send your questions to TAs.
@@ -221,7 +220,7 @@ int main() {
 
 ## 3. Message from Error & Signal 
 ### 3.1 Error Message: strerror()
-We can use [`strerror(int errnum)`](https://man7.org/linux/man-pages/man3/strerror.3.html) function to get the error message of the error code from system calls. The `strerror()` function takes in an integer as input of error code. The `strerror()` function returns a char pointer to the error message.
+We can use [`strerror(int errnum)`](https://man7.org/linux/man-pages/man3/strerror.3.html) function to get the error message of the error code from system calls. The `strerror()` function takes in an integer as input of error code, returning a char pointer to the error message.
 
 ```c
 #include <stdio.h>
