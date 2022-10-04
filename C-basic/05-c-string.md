@@ -4,7 +4,7 @@ This document aims to introduce how to process a string in C, including string c
 
 How to use this document:
 1. For C beginners, please read the document from top to bottom, and try to understand the code and run the code by yourselves. For more other details about C, you can visit any C tutorial website, like [w3school](https://www.w3schools.com/c/index.php) or send your questions to TAs.
-2. You can either run the example code in a new C file, or use `md-auto-compiler.sh` provided in the same directory to automatically compile example code from given range of lines (usage: ./md-auto-compiler.sh <file> <start line> <end line>).
+2. To run the code in this doc, you can either copy them as a new C file, or use `md-auto-compiler.sh` provided in the same directory to automatically compile example code from given range of doc lines (usage: ./md-auto-compiler.sh \<file\> \<start line\> \<end line\> e.g. ./md-auto-compiler.sh 05-c-string.md 22 41).
 
 ## 0.Basic concepts of C string
 ### 0.0 char in C
@@ -40,7 +40,7 @@ int main() {
     return 0;
 }
 ```
-## 1 String operations
+## 1. String operations
 As C string is represented by a char array, we can use the same ideas as array to process a string. For example, we can use `for` loop to traverse a string. Besides, there are some useful in C header file `string.h` to help us process a string. The following sections will introduce some useful functions in `string.h`.
 
 ### 1.1 String length: `strlen()`
@@ -138,7 +138,7 @@ int main() {
 }
 ```
 
-## 2 Format string
+## 2. Format string
 In previous C-Basics, we know how to use `printf()` function to print a format string. A format string is a string that contains one or more format specifiers. The format specifiers are used to specify how to print the corresponding variable. You can tell `printf()` function to print a variable in different ways, such as:
 1. as an integer, in decimal(`%d`), octal(`%o`), or hexadecimal(`%x`).
 2. as a float, specifying number of digits after the decimal point, e.g. `%.2f` means print the float with 2 digits after the decimal point.
@@ -219,7 +219,7 @@ int main() {
 }
 ```
 
-## 3 Message from Error & Signal 
+## 3. Message from Error & Signal 
 ### 3.1 Error Message: strerror()
 We can use [`strerror(int errnum)`](https://man7.org/linux/man-pages/man3/strerror.3.html) function to get the error message of the error code from system calls. The `strerror()` function takes in an integer as input of error code. The `strerror()` function returns a char pointer to the error message.
 
