@@ -39,8 +39,18 @@ The following example shows you how to define a string using "string literal",
 ```c
 #include <stdio.h>
 #include <stdlib.h>
+void captialize_string(char *str){
+    int i = 0;
+    while(str[i] != '\0'){
+        if(str[i] >= 'a' && str[i] <= 'z'){
+            str[i] = str[i] - 'a' + 'A';
+        }
+        i++;
+    }
+}
+
 int main() {
-    char str1[] = "hello"; // define a string
+    char str1[] = "hello"; // define a string using string literal
     char str2[6] = {'h', 'e', 'l', 'l', 'o', '\0'}; // define a string
     char *str3;
     printf("str1: %s\n", str1);
@@ -54,6 +64,9 @@ int main() {
     str3[4] = 'o';
     str3[5] = '\0';
     printf("str3: %s\n", str3);
+
+    captialize_string(str3);
+    printf("capitalized str3: %s\n", str3);
     free(str3);
     return 0;
 }
