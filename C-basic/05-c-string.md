@@ -86,7 +86,7 @@ int main() {
     printf("Use char str[] = \"hello\" to define a string\n");
     printf("length of %s is %lu\n", str, strlen(str));
 
-    char str2[6] = {'h', 'e', 'l', 'l', 'o', '\0'};
+    char str2[6] = {'h', 'e', 'l', '\0', 'o', '\0'};
     printf("Use char str2[6] = {'h', 'e', 'l', 'l', 'o', '\\0'} to define a string\n");
     printf("length of %s is %lu\n", str2, strlen(str2));
 
@@ -100,7 +100,13 @@ int main() {
 Please note that the length of a string does not include the `\0` character. The length of the string "hello" is 5, not 6.
 
 ### 1.2 String copy: `strcpy()`
-We can use `strcpy(char *dest, const char *src)` and `strncpy(char *dest, const char *src, size_t n)` function in `string.h` to copy a string. The `strcpy()` function takes in two char pointers as input, the first one is the *char-string header addr* of the destination string, and the second one is the *char-string header addr* of the source string. The `strcpy()` function copies the source string to the destination string, and returns the *char-string header addr* of the destination string. The `strncpy()` function takes in three char pointers as input, the first one is the *char-string header addr* of the destination string, the second one is the *char-string header addr* of the source string, and the third one is the maximum number of characters to be copied. The `strncpy()` function copies the source string to the destination string, and returns the *char-string header addr* of the destination string. The following example shows you how to use `strcpy()` and `strncpy()` function.
+We can use `strcpy(char *dest, const char *src)` and `strncpy(char *dest, const char *src, size_t n)` function in `string.h` to copy a string. 
+
+The `strcpy()` function takes in two char pointers as input:
+1. the first one is the *char-string header addr* of the destination string
+2. the second one is the *char-string header addr* of the source string. 
+
+The `strcpy()` function copies the source string to the destination string, and returns the *char-string header addr* of the destination string. 
 
 ```c
 The following example shows you how to copy a string.
@@ -158,7 +164,7 @@ int main() {
     char *token;
     int line = 1;
     printf("str: %s\n", str);
-    char *delim = "\t\n";
+    char *delim = " ";
     printf("delim: %s\n", delim);
     token = strtok(str, delim);
     while (token != NULL) {
