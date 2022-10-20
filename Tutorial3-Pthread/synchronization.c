@@ -27,6 +27,7 @@ void* cost(){
         printf("Take MTR, octopus = %d \n", octopus);
         pthread_mutex_unlock(&octopus_lock);
     }
+    return 0;
 }
 
 void* topup(){
@@ -43,9 +44,10 @@ void* topup(){
             sleep(1);
         }
     }
+    return 0;
 }
 
-int main(int argc){
+int main(int argc, char* argv[]){
     pthread_mutex_init(&octopus_lock, NULL);
     pthread_cond_init(&octopus_cond, NULL);
 
@@ -98,7 +100,7 @@ int main(int argc){
 //     }
 // }
 
-// int main(int argc){
+// int main(int argc, char* argv[]){
 //     // pthread_mutex_init(&octopus_lock, NULL);
 //     // pthread_cond_init(&octopus_cond, NULL);
 
@@ -148,7 +150,7 @@ int main(int argc){
 //     }
 // }
 
-// int main(int argc){
+// int main(int argc, char * argv[]){
 //     pthread_t consumer[5], toup_machine;
 //     for (int i=0; i<5; i++){
 //         pthread_create(&consumer[i], NULL, &cost, NULL);
@@ -197,7 +199,7 @@ int main(int argc){
 //     }
 // }
 
-// int main(int argc){
+// int main(int argc, char * argv[]){
 //     pthread_t consumer[5], toup_machine;
 //     for (int i=0; i<5; i++){
 //         pthread_create(&consumer[i], NULL, &cost, NULL);

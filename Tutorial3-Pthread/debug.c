@@ -10,6 +10,7 @@ void* func1(void* arg){
     for (int i =1; i<1000000; i++){
         (*a)++;
     }
+    return 0;
 }
 
 
@@ -18,6 +19,7 @@ void* func2(void* arg){
     for (int i =1; i<1000000; i++){
         (*b)--;
     }
+    return 0;
 }
 
 int main(int argc, char * argv[]){
