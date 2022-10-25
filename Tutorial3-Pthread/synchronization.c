@@ -19,7 +19,7 @@ pthread_cond_t octopus_cond;
 void* cost(){
     for (int i=0; i< 20; i++){
         pthread_mutex_lock(&octopus_lock);
-        while(octopus<0){
+        while(octopus<0){                                       // Is that okay to use 'if' not 'while'?
             printf("Need to top up! octopus = %d \n", octopus);
             pthread_cond_wait(&octopus_cond, &octopus_lock);
         }
@@ -122,26 +122,27 @@ int main(int argc, char* argv[]){
 // pthread_cond_t octopus_cond = PTHREAD_COND_INITIALIZER;
 
 // void* cost(){
+//     pthread_t myself = pthread_self(); 
 //     for (int i=0; i< 5; i++){
 //         pthread_mutex_lock(&octopus_lock);
 //         while(octopus<0){
-//             printf("Need to top up! octopus = %d \n", octopus);
+//             printf("%lu: Need to top up! octopus = %d \n",myself, octopus);
 //             pthread_cond_wait(&octopus_cond, &octopus_lock);
 //         }
 //         octopus -= 10;
-//         printf("Take MTR, octopus = %d \n", octopus);
+//         printf("%lu: Take MTR, octopus = %d \n",myself, octopus);
 //         pthread_mutex_unlock(&octopus_lock);
 //     }
 // }
 
 // void* topup(){
-//     for (int i=0; i<5; i++){
+//     for (int i=0; i<10; i++){
 //         pthread_mutex_lock(&octopus_lock);
 //         if (octopus >= 0){
 //             pthread_mutex_unlock(&octopus_lock);
 //         }
 //         else{
-//             octopus += 15;
+//             octopus += 40;
 //             printf("Top up octopus. octopus = %d \n", octopus);
 //             pthread_mutex_unlock(&octopus_lock);
 //             pthread_cond_signal(&octopus_cond);
@@ -162,6 +163,7 @@ int main(int argc, char* argv[]){
 //     pthread_join(toup_machine, NULL);
 //     return 0;
 // }
+
 // Each time the machine tops up an Octopus Card, only one waiting consumer will be notified.
 
 
@@ -172,25 +174,26 @@ int main(int argc, char* argv[]){
 
 // void* cost(){
 //     for (int i=0; i< 5; i++){
+//         pthread_t myself = pthread_self(); 
 //         pthread_mutex_lock(&octopus_lock);
 //         while(octopus<0){
-//             printf("Need to top up! octopus = %d \n", octopus);
+//             printf("%lu: Need to top up! octopus = %d \n",myself, octopus);
 //             pthread_cond_wait(&octopus_cond, &octopus_lock);
 //         }
 //         octopus -= 10;
-//         printf("Take MTR, octopus = %d \n", octopus);
+//         printf("%lu: Take MTR, octopus = %d \n",myself, octopus);
 //         pthread_mutex_unlock(&octopus_lock);
 //     }
 // }
 
 // void* topup(){
-//     for (int i=0; i<5; i++){
+//     for (int i=0; i<10; i++){
 //         pthread_mutex_lock(&octopus_lock);
 //         if (octopus >= 0){
 //             pthread_mutex_unlock(&octopus_lock);
 //         }
 //         else{
-//             octopus += 15;
+//             octopus += 40;
 //             printf("Top up octopus. octopus = %d \n", octopus);
 //             pthread_mutex_unlock(&octopus_lock);
 //             pthread_cond_broadcast(&octopus_cond);
@@ -222,8 +225,9 @@ int main(int argc, char* argv[]){
 // void *func1 (void *arg){
 //     printf("func1 set the cancellation state to ignore\n");  
 //     pthread_setcancelstate(PTHREAD_CANCEL_DISABLE, NULL);  
-//     sleep(10);
-//     printf("func1 set the cancellation state to enable with immediate action\n");  
+//     sleep(8);
+//     printf("func1 set the cancellation state to enable with immediate action\n"); 
+//     sleep(1); 
 //     pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);  
 //     pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 //     while (1) printf("\n");

@@ -9,36 +9,9 @@
 
 // >>>> 1.1: sharing data across threads of the same process (No race condition) -------
 
-int x=0;
-void* func(){
-    x++;
-}
-
-int main(int argc, char* argv[]){
-    pthread_t t1, t2;
-    if (pthread_create(&t1, NULL, &func, NULL) != 0){
-        return 1;
-    }
-    if (pthread_create(&t2, NULL, &func,  NULL) != 0){
-        return 2;
-    }
-    if (pthread_join(t1, NULL) != 0){
-        return 3;
-    }
-    if (pthread_join(t2, NULL) != 0){
-        return 4;
-    }
-    printf("the final result: x=%d\n",x);
-    return 0;
-}
-
-// >>>> 1.2: sharing data across threads of the same process (race condition) -------
-
 // int x=0;
 // void* func(){
-//     for (int i=0;i<10000000;i++){
-//         x++;
-//     }
+//     x++;
 // }
 
 // int main(int argc, char* argv[]){
@@ -58,6 +31,33 @@ int main(int argc, char* argv[]){
 //     printf("the final result: x=%d\n",x);
 //     return 0;
 // }
+
+// >>>> 1.2: sharing data across threads of the same process (race condition) -------
+
+int x=0;
+void* func(){
+    for (int i=0;i<10000000;i++){
+        x++;
+    }
+}
+
+int main(int argc, char* argv[]){
+    pthread_t t1, t2;
+    if (pthread_create(&t1, NULL, &func, NULL) != 0){
+        return 1;
+    }
+    if (pthread_create(&t2, NULL, &func,  NULL) != 0){
+        return 2;
+    }
+    if (pthread_join(t1, NULL) != 0){
+        return 3;
+    }
+    if (pthread_join(t2, NULL) != 0){
+        return 4;
+    }
+    printf("the final result: x=%d\n",x);
+    return 0;
+}
 // !!: using ``gcc -S race_condition.c`` to check the assembly code of 'x++', 
 // then you will know why dose the race condition happen.
 

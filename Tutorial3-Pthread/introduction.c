@@ -8,16 +8,16 @@
 
 // >>>> 1.1: creating a thread. -----------------------------------
 
-void* func(){
-    printf("Test the pthread\n");
-}
+// void* func(){
+//     printf("Test the pthread\n");
+// }
 
-int main(int argc, char * argv[]){
-    pthread_t thread1;
-    pthread_create(&thread1, NULL, &func, NULL);
-    pthread_join(thread1,NULL);
-    return 0;
-}
+// int main(int argc, char * argv[]){
+//     pthread_t thread1;
+//     pthread_create(&thread1, NULL, &func, NULL);
+//     pthread_join(thread1,NULL);
+//     return 0;
+// }
 
 // >>>> 1.2: (Coding Safety) creating a thread. -----------------------------------
 
@@ -207,7 +207,7 @@ int main(int argc, char * argv[]){
 //     //     printf("the %d-th thread terminated\n", i);
 //     // }
 //     printf("close the main thread!\n");
-//     pthread_exit(0);
+//     return 0;
 // }
 // Since we terminate the main thread, the resources allocated to the created threads 
 // can not be released by the main thread (via the pthread_join()).
@@ -334,24 +334,24 @@ int main(int argc, char * argv[]){
 
 // >>>> 6.2: Get returned value from the created thread. (Right implementation) -------------------------------------
 
-// void* func(){
-//     int value = 5;
-//     int* result = malloc(sizeof(int));
-//     *result = value;
-//     printf("Thread: The returned value is %d\n",value);
-//     printf("Thread: The address of the returned value <result> %p\n",result);
-//     return (void*) result;
-// }
+void* func(){
+    int value = 5;
+    int* result = malloc(sizeof(int));
+    *result = value;
+    printf("Thread: The returned value is %d\n",value);
+    printf("Thread: The address of the returned value <result> %p\n",result);
+    return (void*) result;
+}
 
-// int main(int argc, char * argv[]){ 
-//     pthread_t thread1;
-//     int* return_value;
-//     pthread_create(&thread1, NULL, &func, NULL);
-//     pthread_join(thread1,(void**) &return_value);
-//     printf("Main: The returned value is %d\n",*return_value);
-//     printf("Main: The address of the returned value <return_value> %p\n",return_value);
-//     free(return_value);
-//     return 0;
-// }
+int main(int argc, char * argv[]){ 
+    pthread_t thread1;
+    int* return_value;
+    pthread_create(&thread1, NULL, &func, NULL);
+    pthread_join(thread1,(void**) &return_value);
+    printf("Main: The returned value is %d\n",*return_value);
+    printf("Main: The address of the returned value <return_value> %p\n",return_value);
+    free(return_value);
+    return 0;
+}
 // !!: Reason: in the func(), we allocate a space of the heap to store the returned value, 
 // and the heap is shared by all threads of the same process. 
