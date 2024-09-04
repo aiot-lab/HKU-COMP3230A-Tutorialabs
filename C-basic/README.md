@@ -1,5 +1,5 @@
 # Useful C-language skills for OS course 
-[TOC]
+
 ## How to use 
 Document:
 1. For basic Syntax of C language, please refer to [w3school: C Tutorial](https://www.w3schools.com/c/index.php)
