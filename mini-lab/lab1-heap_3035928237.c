@@ -5,6 +5,7 @@
 int* initialize_array(int n){
     int *heap_arr = NULL;
     // TODO: 1. Allocate memory for 'n' integers using malloc. Assign the address to 'heap_arr'. (~1 line)
+    heap_arr = malloc(sizeof(int) * n);
     
     if (heap_arr == NULL) {
         printf("Memory allocation failed!\n");
@@ -36,6 +37,6 @@ int main(int argc, char *argv[]) {
     }
 
     // TODO: 3. Free the dynamically allocated memory. (~1 line)
-    
+    free(arr);
     return 0;
 }
