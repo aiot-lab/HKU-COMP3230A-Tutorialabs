@@ -1,6 +1,7 @@
 // file: 00-hello-world.c
 // description: hello world
 #include <stdio.h>
+#include <math.h>
 
 // This is the entry point of the program, also called main function.
 // argc: (optional) number of arguments from command line
@@ -18,5 +19,8 @@ int main(int argc, char *argv[]) {
 
     // printf is a function to print to the standard output(stdout)
     printf("Hello %s! Welcome to %s", argv[1], name);
+    double x = 1.0;
+    double y = sqrt(x);
+    printf("sqrt(%f) = %f\n", x, y);
     return 0;
 }

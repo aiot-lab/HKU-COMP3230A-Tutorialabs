@@ -8,6 +8,7 @@
 #include "COMP3230_signal.h"
 
 void signal_handler(int signum) {
+    //static local variable: initialized only once the first time the function is called
     static int count = 0;
     printf("Caught signal %d (%s) - %d time(s)\n", signum, signal_list[signum], ++count);
     if (count == 3) {

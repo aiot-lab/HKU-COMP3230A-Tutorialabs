@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     while (1) {
         printf("(%d) sec. Infinity Loop: Exit on CTRL+C. Put to back on CTRL+Z. Use kill -9 %d to kill it.\n", ++i, getpid());
         fflush(stdout); // make sure the output is printed
-        sleep(1);
+        sleep(5);
     }
     return 0;
 }
