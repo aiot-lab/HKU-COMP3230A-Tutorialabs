@@ -143,9 +143,6 @@ int main() {
 
 // void* thr_func(void* arg) {
 //     int id = *(int*) arg; // (int*) turn void ptr to int ptr
-//     for (int i = 0; i < 50; i++) { 
-//         a[i] = a[i] * 2; 
-//     }
 //     for (int i = 50 * id; i < 50 * (id + 1); i++) { 
 //         a[i] = a[i] * 2; 
 //     }
