@@ -165,7 +165,7 @@ int main() {
 //     for (int i = 0; i < 2; i++) {
 //         iret = pthread_create(&thrs[i], attr, thr_func, &args[i]);
 //         if (iret != 0) { 
-//             perror("Cannot Create Thread %d", i); 
+//             perror("Cannot Create Thread"); 
 //         }
 //     }
 
