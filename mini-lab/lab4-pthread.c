@@ -20,7 +20,7 @@ void *count_up(void *arg) {
 int main(int argc, char *argv[]) {
     pthread_t threads[NUM_THREADS];
 
-    // TODO3: init condition variables/semphore (~1 line)
+    // TODO3: init condition variables/semaphore (~1 line)
 
     for (int i = 0; i < NUM_THREADS; i++) {
         // TODO1: Create multiple threads to execute count_up (~1 line)
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
 		// TODO2: wait all the threads to finish running (~1 line)
     }
 
-    // TODO3: free condition variables/semphore (~1 line)
+    // TODO3: free condition variables/semaphore (~1 line)
 
     printf("Final counter value: %d\n", counter);
     printf("Expected counter value: %d\n", NUM_ITERATIONS * NUM_THREADS);
