@@ -30,8 +30,9 @@ int main() {
         signal(SIGHUP, sighup);
         signal(SIGINT, sigint);
         signal(SIGQUIT, sigquit);
-        while (1);
+        while (1) pause();
     } else {  /* parent */
+        sleep(1);
         printf("\nPARENT: sending SIGHUP\n");
         kill(pid, SIGHUP);
         
