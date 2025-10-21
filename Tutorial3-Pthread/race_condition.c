@@ -84,7 +84,7 @@ int main() {
 // }
 
 
-// Mutex lock - multiple threads
+// Mutex lock - trylock
 
 // int a = 0, b = 0, iret;
 // pthread_mutex_t lock_a, lock_b;
